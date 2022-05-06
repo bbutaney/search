@@ -1,0 +1,4 @@
+<xml>
+    <page><title>A</title><id>1</id><text>[[B]]</text></page>
+    <page><title>B</title><id>2</id><text>[[A]]</text></page>
+</xml>

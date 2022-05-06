@@ -1,0 +1,95 @@
+NAMES
+Byron Butaney
+Arman Deendar
+
+KNOWN BUGS:
+None
+
+INSTRUCTIONS:
+To use our search engine the user must be in the active directory ending with 
+search-adeendar-bbutaney. Then the user must enter 
+
+    python3 index.py wikis/<NAME OF WIKI>.xml <name titles doc>.txt <docs doc>.txt
+    <words doc>.txt
+
+If Indexer correctly runs, the user must enter 
+
+    python3 query.py --pagerank <name titles doc>.txt <docs doc>.txt
+    <words doc>.txt
+
+Then if the user has populated Indexer and the files were able to be read by 
+Querier, then the user will be prompted with a 'search' in the terminal for the top 10 
+documents in the input wiki will be returned for the query. 
+
+DESIGN
+The Indexer class takes in an input wiki, parses the wiki for all the necesary 
+information (titles, page ids, pages each page links to, total number of documents)
+to set up dictionaries that store the page ids to titles, words to ids to relevance,
+and page ids to pageranks (based on linkasges between pages in a given wiki).
+
+When all of these files are correctly written by file_io in Indexer, they then get
+passed into Querier for the class to read in those dicitionaries that were populated 
+by Indexer. The user enters a query and Querier scores the terms in the query
+against the relevance of each word in the wiki and the pagerank authority of each page 
+in the wiki. Query returns the top 10 documents given by a search. 
+
+TESTING
+We tested our program incrementally, first making sure that we could parse the xml
+correctly before perfoming any computations. We then tested our code for finding
+the relevancy against the given examples, and did the same for pageRank. With page
+rank we made sure to print the dicitonary that maps pages to an array of pages
+it links to in order to check that we were getting to correct base cases for the
+pagerank weighting calculations. 
+
+We wrote unit tests to test that the instance variables in index were being populated
+as expected. After running a fully functional indexer, we wrote several test xmls
+to test the base cases including:
+- A file without any corpus links
+- An empty xml file
+- A file with only one doc in the corpus with no text or links
+- A file with only one doc in the corpus with text and links out of the corpus
+    - This file also checks for case sensitivity of links
+- A file that contains several variations of links 
+- A file with two docs that link only to one another
+
+System Testing Outputs:
+MedWiki, no pagerank:
+search> cats
+kiritimati
+kattegat
+northern mariana islands
+morphology (linguistics)
+lynx
+freyja
+autosomal dominant polycystic kidney
+fable
+mercalli intensity scale
+isle of man
+
+MedWiki, pagerank:
+search> june
+netherlands
+pakistan
+international criminal court
+niger
+neolithic
+nazi germany
+north pole
+north africa
+june
+lithuania
+
+search> United States
+illinois
+michigan
+ohio
+federated states of micronesia
+international criminal court
+government
+pakistan
+louisiana
+netherlands
+nazi germany
+
+search> hdafdfhjkdfhsd
+Search item hdafdfhjkdfhsd has no relevant documents
