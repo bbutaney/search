@@ -1,7 +1,0 @@
-<!--This file only contains links to documents outside of the corpus--> 
-<xml>
-    <page><title>A</title><id>1</id><text>[[J]]</text></page>
-    <page><title>B</title><id>2</id><text>[[NotinCorpus]]</text></page>
-    <page><title>C</title><id>3</id><text>[[F]] [[file.jpg]] [[K]]</text></page>
-    <page><title>D</title><id>4</id><text>[[2]] [[G]] [[L]]</text></page>
-</xml>
